@@ -23,7 +23,7 @@ io.on("connection", (socketServer) => {
   // Escuchar el evento 
   socketServer.on('mensaje-to-server', (data) => {
     console.log(data);
-    socketServer.emit('mensaje-from-server', data);
+    io.emit('mensaje-from-server', data);
   });
 
 
