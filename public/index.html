@@ -11,10 +11,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        const socket = io("http://localhost:8080");
+        const socketClient = io("http://localhost:8080");
 
-        socket.on('mensaje-bienvenida', (data) => {
+        socketClient.on('mensaje-bienvenida', (data) => {
             console.log(data)
+        });
+
+        socketClient.emit('mensaje-cliente',  {
+            msg: 'cliente',
+            nombre: 'Jean Pool'
         })
     </script>
 </body>
