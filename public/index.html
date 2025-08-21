@@ -19,7 +19,7 @@
             </div>
             <div class="col-span-4 flex">
                 <button
-                    class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition">
+                    class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition cursor-pointer">
                     Enviar
                 </button>
             </div>
@@ -43,6 +43,19 @@
         const formulario = document.querySelector('#miFormulario');
         const mensajes = document.querySelector('#misMensajes');
         const txtMensaje = document.querySelector('#txtMensaje');
+
+        formulario.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const nuevoMensaje = txtMensaje.value;
+            socketClient.emit('mensaje-to-server', {texto: nuevoMensaje});
+        });
+
+        socketClient.on('mensaje-from-server', (data) => {
+            // mensajes.innerHTML -> <li>Hola</li><li>Mundo</li>
+            mensajes.innerHTML += `<li>${data.texto}</li>`;
+        });
+
 
         // socketClient.on('mensaje-bienvenida', (data) => {
         //     console.log(data)

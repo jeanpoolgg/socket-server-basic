@@ -19,14 +19,22 @@ app.use(express.static(publicPath));
 
 // Eventos de Socket.IO
 io.on("connection", (socketServer) => {
-  socketServer.emit('mensaje-bienvenida', {
-    msg: 'Bienvenido al server',
-    fecha: new Date()
+  
+  // Escuchar el evento 
+  socketServer.on('mensaje-to-server', (data) => {
+    console.log(data);
+    socketServer.emit('mensaje-from-server', data);
   });
 
-  socketServer.on('mensaje-cliente', (data) => {
-    console.log(data)
-  })
+
+  // socketServer.emit('mensaje-bienvenida', {
+  //   msg: 'Bienvenido al server',
+  //   fecha: new Date()
+  // });
+
+  // socketServer.on('mensaje-cliente', (data) => {
+  //   console.log(data)
+  // })
 });
 
 // Iniciar servidor
