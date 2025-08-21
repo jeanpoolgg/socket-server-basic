@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Chat</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <h1>Mini Chat</h1>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js" integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<body class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Mini Chat</h1>
+
+    <form id="miFormulario" class="mb-6">
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-8">
+                <input type="text" id="txtMensaje" placeholder="Mensaje"
+                    class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-1 " />
+            </div>
+            <div class="col-span-4 flex">
+                <button
+                    class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition">
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <ul id="misMensajes" class="space-y-2 list-disc list-inside">
+            <li>Hola</li>
+            <li>Mundo</li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"
+        integrity="sha512-8BHxHDLsOHx+flIrQ0DrZcea7MkHqRU5GbTHmbdzMRnAaoCIkZ97PqZcXJkKZckMMhqfoeaJE+DNUVuyoQsO3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const socketClient = io("http://localhost:8080");
 
-        socketClient.on('mensaje-bienvenida', (data) => {
-            console.log(data)
-        });
+        // Referencias elementos del DOM
+        const formulario = document.querySelector('#miFormulario');
+        const mensajes = document.querySelector('#misMensajes');
+        const txtMensaje = document.querySelector('#txtMensaje');
 
-        socketClient.emit('mensaje-cliente',  {
-            msg: 'cliente',
-            nombre: 'Jean Pool'
-        })
+        // socketClient.on('mensaje-bienvenida', (data) => {
+        //     console.log(data)
+        // });
+
+        // socketClient.emit('mensaje-cliente', {
+        //     msg: 'cliente',
+        //     nombre: 'Jean Pool'
+        // })
     </script>
 </body>
+
 </html>
