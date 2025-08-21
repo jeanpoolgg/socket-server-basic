@@ -21,8 +21,11 @@ console.log("RUTAAA",publicPath);
 app.use(express.static(publicPath));
 
 // Eventos de Socket.IO
-io.on("connection", () => {
-    console.log("Cliente conectado");
+io.on("connection", (socket) => {
+  socket.emit('mensaje-bienvenida', {
+    msg: 'Bienvenido al server',
+    fecha: new Date()
+  });
 });
 
 // Iniciar servidor
