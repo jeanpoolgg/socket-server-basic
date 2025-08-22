@@ -1,4 +1,4 @@
-import { Server as SocketIOServer } from 'socket.io';
+import { Server as SocketIOServer, Socket } from 'socket.io';
 
 class Sockets {
     private io: SocketIOServer;
@@ -10,10 +10,10 @@ class Sockets {
 
     private socketEvents() {
         // On connection
-        this.io.on('connection', (socketServer) => {
+        this.io.on('connection', (socket: Socket) => {
 
             // Escuchar evento: mensaje-to-server
-            socketServer.on('mensaje-to-server', (data) => {
+            socket.on('mensaje-to-server', (data) => {
                 console.log(data);
                 this.io.emit('mensaje-from-server', data);
             });
