@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import http, { Server as HTTPServer } from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import path from 'path';
+import Sockets from './sockets';
 
 class Server {
     private app: Application;
@@ -30,7 +31,7 @@ class Server {
     }
 
     private sockets(): void {
-
+        new Sockets(this.io);
     }
 
 
